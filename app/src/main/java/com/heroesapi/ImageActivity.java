@@ -19,6 +19,8 @@ import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import heroesapi.HeroesAPI;
 import model.ImageResponse;
@@ -26,6 +28,7 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 import url.Url;
 
@@ -44,6 +47,13 @@ public class ImageActivity extends AppCompatActivity {
         etDesc = findViewById(R.id.etDesc);
         btnSave = findViewById(R.id.btnSave);
         imgPhoto = findViewById(R.id.imgPhoto);
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                save();
+            }
+        });
 
         imgPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,6 +126,32 @@ public class ImageActivity extends AppCompatActivity {
     }
 
     private void save(){
+        SaveImageOnly();
+        String name = etName.getText().toString();
+        String desc = etDesc.getText().toString();
+
+        Map<String,String> map = new HashMap<>();
+        map.put("name",name);
+        map.put("desc",desc);
+        map.put("image",imageName);
+
+        HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
+        Call<Void> heroesCall = heroesAPI.addHero(map);
+
+        heroesCall.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()){
+                    Toast.makeText(ImageActivity.this,"code " +response.code(),Toast.LENGTH_LONG).show();
+                }
+                Toast.makeText(ImageActivity.this,"Added successfully",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(ImageActivity.this,"error " +t.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
         
     }
 }

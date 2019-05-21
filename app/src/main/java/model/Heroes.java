@@ -4,10 +4,25 @@ public class Heroes {
     private  String _id;
     private  String name;
     private  String desc;
+    private String image;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+//    public Heroes(String name, String desc) {
+//        this.name = name;
+//        this.desc = desc;
+//    }
 
     public Heroes(String name, String desc) {
         this.name = name;
         this.desc = desc;
+        this.image = image;
     }
 
     public String get_id() {

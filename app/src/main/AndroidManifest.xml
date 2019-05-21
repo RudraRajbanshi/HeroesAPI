@@ -14,18 +14,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ImageActivity">
+        <activity android:name=".DashboardActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoadImage"></activity>
-        <activity android:name=".Register_Activity">
+        <activity android:name=".ImageActivity"></activity>
+        <activity android:name=".LoadImage" />
+        <activity android:name=".Register_Activity"></activity>
+        <activity android:name=".MainActivity">
 
         </activity>
-        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>

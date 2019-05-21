@@ -75,7 +75,7 @@ public class ImageActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK){
             if (data == null){
-                Toast.makeText(ImageActivity.this,"please select an image",Toast.LENGTH_LONG);
+                Toast.makeText(ImageActivity.this,"please select an image",Toast.LENGTH_LONG).show();
             }
         }
         Uri uri = data.getData();
@@ -102,12 +102,12 @@ public class ImageActivity extends AppCompatActivity {
         }
     }
     private void StrictMode(){
-        StrictMode.ThreadPolicy policy = new android.os.StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
     }
     private void SaveImageOnly(){
         File file = new File(imagepath);
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/for-data"),file);
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("imageFile",file.getName(),requestBody);
 
         HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
@@ -143,6 +143,7 @@ public class ImageActivity extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (!response.isSuccessful()){
                     Toast.makeText(ImageActivity.this,"code " +response.code(),Toast.LENGTH_LONG).show();
+                    return;
                 }
                 Toast.makeText(ImageActivity.this,"Added successfully",Toast.LENGTH_LONG).show();
             }

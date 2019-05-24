@@ -33,30 +33,9 @@ public class DashboardActivity extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2:3000/")
-                        .addConverterFactory(GsonConverterFactory.create())
-                        .build();
-
-                HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
-                Call<List<Heroes>> logout = heroesAPI.logout();
-
-                logout.enqueue(new Callback<List<Heroes>>() {
-                    @Override
-                    public void onResponse(Call<List<Heroes>> call, Response<List<Heroes>> response) {
-                        if (response.isSuccessful()){
                             Intent intent = new Intent(DashboardActivity.this,LoginActivity.class);
                             startActivity(intent);
                             finish();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Heroes>> call, Throwable t) {
-                        Toast.makeText(DashboardActivity.this,"error",Toast.LENGTH_LONG).show();
-                    }
-                });
-
             }
         });
 

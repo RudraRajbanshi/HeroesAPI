@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".DashboardActivity">
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:text="Logout"
+        android:textColor="@android:color/background_light"
+        android:background="@android:color/holo_red_dark"
+        android:layout_gravity="end"/>
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

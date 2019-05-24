@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(Url.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
-        Call<List<Heroes>> listCall = heroesAPI.getAllHeroes();
+        Call<List<Heroes>> listCall = heroesAPI.getAllHeroes(Url.Cookie);
 
         listCall.enqueue(new Callback<List<Heroes>>() {
             @Override
